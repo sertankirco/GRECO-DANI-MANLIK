@@ -13,14 +13,16 @@ if (typeof window !== 'undefined' && !window.dataLayer) {
  * Pushes a generic event to the dataLayer
  */
 export const trackEvent = (eventName: string, params: Record<string, any> = {}) => {
-  if (window.dataLayer) {
+  if (typeof window !== 'undefined' && window.dataLayer) {
     window.dataLayer.push({
       event: eventName,
       ...params,
     });
-    // Log for debugging in development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('GTM Event:', eventName, params);
+    
+    // Check if we are in a local environment for debugging without using process.env
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (isLocal) {
+      console.log('GTM Event Tracked:', eventName, params);
     }
   }
 };
