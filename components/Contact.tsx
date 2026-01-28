@@ -17,24 +17,51 @@ const Contact: React.FC<ContactProps> = ({ content }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Formspree Form ID güncellendi
+  const FORMSPREE_ID = "f/xpqdggjl"; 
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage('');
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      
-      // Track the successful submission
-      trackEvent('contact_form_submit', {
-         form_subject: formState.subject
+    try {
+      // Formspree'ye gerçek istek atıyoruz
+      const response = await fetch(`https://formspree.io/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formState)
       });
 
-      setFormState({ name: '', email: '', phone: '', subject: '', message: '' });
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
+      if (response.ok) {
+        setSubmitted(true);
+        
+        // Track the successful submission
+        trackEvent('contact_form_submit', {
+           form_subject: formState.subject
+        });
+
+        setFormState({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        // Hata durumu
+        const data = await response.json();
+        // Fix: Object.hasOwn requires ES2022 lib, use Object.prototype.hasOwnProperty.call for compatibility
+        if (Object.prototype.hasOwnProperty.call(data, 'errors')) {
+          setErrorMessage(data["errors"].map((error: any) => error["message"]).join(", "));
+        } else {
+          setErrorMessage("Bir hata oluştu, lütfen tekrar deneyin.");
+        }
+      }
+    } catch (error) {
+      setErrorMessage("Sunucuya bağlanılamadı. Lütfen internetinizi kontrol edin.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -185,6 +212,13 @@ const Contact: React.FC<ContactProps> = ({ content }) => {
                   </>
                 )}
               </button>
+              
+              {errorMessage && (
+                <p className="text-red-600 text-center font-medium bg-red-50 p-2 rounded">
+                  {errorMessage}
+                </p>
+              )}
+              
               {submitted && (
                  <p className="text-green-600 text-center font-medium animate-pulse">
                    Mesajınız başarıyla gönderildi! / Message sent successfully!
