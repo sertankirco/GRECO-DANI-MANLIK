@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Content } from '../types';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 import { trackEvent } from '../analytics';
 
 interface ContactProps {
@@ -118,6 +118,16 @@ const Contact: React.FC<ContactProps> = ({ content }) => {
                   <div>
                     <h3 className="font-bold text-lg mb-1">Phone</h3>
                     <p className="text-greek-100 font-light">{content.info.phone}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-white/10 p-3 rounded-lg">
+                    <MessageCircle className="w-6 h-6 text-greek-100" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">WhatsApp / Mesaj</h3>
+                    <p className="text-greek-100 font-light">{content.info.whatsapp}</p>
                   </div>
                 </div>
              </div>

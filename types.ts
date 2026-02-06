@@ -62,6 +62,7 @@ export interface Content {
       address: string;
       email: string;
       phone: string;
+      whatsapp: string;
     };
   };
   blog: {

@@ -95,7 +95,8 @@ export const CONTENT: Record<Language, Content> = {
       info: {
         address: "Leoforos Kifisias 24, Atina, Yunanistan",
         email: "info@grecoturk.law",
-        phone: "+30 210 123 4567"
+        phone: "+30 210 123 4567",
+        whatsapp: "+90 555 500 07 00"
       }
     },
     blog: {
@@ -200,7 +201,8 @@ export const CONTENT: Record<Language, Content> = {
       info: {
         address: "Leoforos Kifisias 24, Athens, Greece",
         email: "info@grecoturk.law",
-        phone: "+30 210 123 4567"
+        phone: "+30 210 123 4567",
+        whatsapp: "+90 555 500 07 00"
       }
     },
     blog: {
