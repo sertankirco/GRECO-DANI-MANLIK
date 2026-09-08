@@ -17,6 +17,7 @@ export interface BlogPost {
   readTime: string;
   category: string;
   imageUrl: string;
+  isCustom?: boolean;
 }
 
 export interface Content {
@@ -27,6 +28,7 @@ export interface Content {
     contact: string;
     blog: string;
     cta: string;
+    writePost?: string;
   };
   hero: {
     title: string;
@@ -72,12 +74,17 @@ export interface Content {
     readMore: string;
     backToBlog: string;
     backToHome: string;
+    writePost: string;
+    editPost: string;
+    deletePost: string;
     categories: {
       all: string;
       investment: string;
       process: string;
       lifestyle: string;
-    }
+      legal?: string;
+      tax?: string;
+    };
   };
   footer: {
     rights: string;

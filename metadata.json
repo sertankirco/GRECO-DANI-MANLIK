@@ -1,5 +1,6 @@
 {
   "name": "GrecoTurk Legal",
   "description": "Professional legal services landing page for Turkish citizens in Greece.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

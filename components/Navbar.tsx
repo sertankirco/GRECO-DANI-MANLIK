@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, PenSquare } from 'lucide-react';
 import { Language, Content } from '../types';
 import { trackLinkClick, trackEvent } from '../analytics';
 
@@ -7,8 +7,9 @@ interface NavbarProps {
   language: Language;
   setLanguage: (lang: Language) => void;
   content: Content['nav'];
-  currentView: 'home' | 'blog-list' | 'blog-detail';
-  setCurrentView: (view: 'home' | 'blog-list' | 'blog-detail') => void;
+  currentView: 'home' | 'blog-list' | 'blog-detail' | 'blog-editor';
+  setCurrentView: (view: 'home' | 'blog-list' | 'blog-detail' | 'blog-editor') => void;
+  onWritePost?: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ 
@@ -16,7 +17,8 @@ const Navbar: React.FC<NavbarProps> = ({
   setLanguage, 
   content,
   currentView,
-  setCurrentView
+  setCurrentView,
+  onWritePost
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -113,7 +115,21 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Right Section (Lang + CTA) */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
+            {onWritePost && (
+              <button
+                onClick={() => {
+                  onWritePost();
+                  setIsOpen(false);
+                }}
+                className="flex items-center gap-1.5 text-xs font-semibold text-greek-700 bg-greek-50 hover:bg-greek-100 border border-greek-200 px-3.5 py-2 rounded-full transition-all hover:shadow-sm cursor-pointer"
+                title={content.writePost || 'Blog Yaz'}
+              >
+                <PenSquare className="w-3.5 h-3.5 text-greek-600" />
+                <span>{content.writePost || 'Blog Yaz'}</span>
+              </button>
+            )}
+
             <button
               onClick={changeLanguage}
               className="flex items-center gap-1 text-gray-600 hover:text-greek-600 font-medium cursor-pointer"
@@ -162,6 +178,19 @@ const Navbar: React.FC<NavbarProps> = ({
                 {link.label}
               </a>
             ))}
+            {onWritePost && (
+              <button
+                onClick={() => {
+                  onWritePost();
+                  setIsOpen(false);
+                }}
+                className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-greek-800 bg-greek-50 hover:bg-greek-100 border border-greek-200 transition-colors"
+              >
+                <PenSquare className="w-4 h-4 text-greek-600" />
+                <span>{content.writePost || 'Yeni Blog Yazısı Yaz'}</span>
+              </button>
+            )}
+
             <div className="pt-4 border-t border-gray-100 flex items-center justify-between px-3 mt-4">
               <button
                 onClick={changeLanguage}

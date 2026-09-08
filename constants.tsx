@@ -19,6 +19,7 @@ export const CONTENT: Record<Language, Content> = {
       about: "Neden Biz?",
       contact: "İletişim",
       blog: "Blog",
+      writePost: "Blog Yaz",
       cta: "Danışmanlık Alın",
     },
     hero: {
@@ -106,11 +107,16 @@ export const CONTENT: Record<Language, Content> = {
       readMore: "Devamını Oku",
       backToBlog: "Blog Listesine Dön",
       backToHome: "Ana Sayfaya Dön",
+      writePost: "Yeni Blog Yazısı Yaz",
+      editPost: "Yazıyı Düzenle",
+      deletePost: "Yazıyı Sil",
       categories: {
         all: "Tümü",
         investment: "Yatırım",
         process: "Prosedür",
-        lifestyle: "Yaşam"
+        lifestyle: "Yaşam",
+        legal: "Hukuk & Mevzuat",
+        tax: "Vergi & Maliye"
       }
     },
     footer: {
@@ -125,6 +131,7 @@ export const CONTENT: Record<Language, Content> = {
       about: "Why Us?",
       contact: "Contact",
       blog: "Blog",
+      writePost: "Write Post",
       cta: "Get Consultation",
     },
     hero: {
@@ -212,11 +219,16 @@ export const CONTENT: Record<Language, Content> = {
       readMore: "Read More",
       backToBlog: "Back to Blog",
       backToHome: "Back to Home",
+      writePost: "Write New Post",
+      editPost: "Edit Post",
+      deletePost: "Delete Post",
       categories: {
         all: "All",
         investment: "Investment",
         process: "Process",
-        lifestyle: "Lifestyle"
+        lifestyle: "Lifestyle",
+        legal: "Law & Regulations",
+        tax: "Tax & Finance"
       }
     },
     footer: {
